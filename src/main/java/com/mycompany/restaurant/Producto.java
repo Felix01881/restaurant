@@ -8,22 +8,28 @@
  * @author salainformatica
  */
 public class Producto {
- 
 
     private final String nombre;
     private final double precio;
     private int cantidad;
 
     public Producto(String nombre, double precio) {
-        this.nombre   = nombre;
-        this.precio   = precio;
+        this.nombre = nombre;
+        this.precio = precio;
         this.cantidad = 0;
     }
 
-    
-    public String getNombre()   { return nombre; }
-    public double getPrecio()   { return precio; }
-    public int    getCantidad() { return cantidad; }
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
 
     /** Agrega unidades al pedido actual. */
     public void agregarCantidad(int unidades) {
@@ -44,7 +50,5 @@ public class Producto {
     public double calcularSubtotalParcial() {
         return precio * cantidad;
     }
-   
-   
-   
+
 }
