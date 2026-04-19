@@ -47,6 +47,56 @@ public class MenuRestaurante {
         return true;
     }
 
+    // ── Opciones ─────────────────────────────────────────────
+    private void verCarta() {
+        Impresora.mostrarCarta(mesa);
+    }
+
+    private void agregarProducto() {
+        System.out.println("--- AGREGAR PRODUCTO ---");
+        int numeroProd = leerEntero(
+                "Número de producto (1-" + mesa.getTamanoCatalogo() + "): ");
+        if (!esNumeroProductoValido(numeroProd))
+            return;
+        int cantidad = leerEntero("Cantidad: ");
+        if (!esCantidadValida(cantidad))
+            return;
+        if (!mesa.estaActiva()) {
+            int numeroMesa = leerEntero("Ingrese número de mesa: ");
+            mesa.setNumeroMesa(numeroMesa > 0 ? numeroMesa : 1);
+        }
+        mesa.agregarProducto(numeroProd - 1, cantidad);
+        Producto p = mesa.getProducto(numeroProd - 1);
+        System.out.println("Producto agregado: " + p.getNombre() + " x" + cantidad);
+    }
+
+    private void verPedidoActual() {
+        if (!mesa.tienePedido()) {
+            System.out.println("No hay productos en el pedido. Use la opción 2.");
+            return;
+        }
+        Impresora.mostrarPedido(mesa);
+    }
+
+    private void generarFactura() {
+        if (!mesa.tienePedido()) {
+            System.out.println("No hay productos en el pedido. Use la opción 2 primero.");
+            return;
+        }
+        Impresora.imprimirFacturaCompleta(mesa);
+    }
+
+    private void nuevaMesa() {
+        mesa.reiniciar();
+        System.out.println("Mesa reiniciada. Lista para nuevo cliente.");
+    }
+
+    private boolean salir() {
+        System.out.println("Hasta luego!");
+        return false;
+    }
+
+
     
 
 }
