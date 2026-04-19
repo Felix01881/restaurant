@@ -96,6 +96,65 @@ public class MenuRestaurante {
         return false;
     }
 
+    // ── Validaciones ──────────────────────────────────────────
+    private boolean esNumeroProductoValido(int numero) {
+        if (numero <= 0) {
+            System.out.println("El número debe ser mayor a cero.");
+            return false;
+        }
+        if (numero > mesa.getTamanoCatalogo()) {
+            System.out.println("Producto no existe. La carta tiene "
+                    + mesa.getTamanoCatalogo() + " productos.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean esCantidadValida(int cantidad) {
+        if (cantidad <= 0) {
+            System.out.println("La cantidad debe ser un valor positivo.");
+            return false;
+        }
+        return true;
+    }
+
+    // ── Entrada ───────────────────────────────────────────────
+    private int leerEntero(String mensaje) {
+        System.out.print(mensaje);
+        if (scanner.hasNextInt())
+            return scanner.nextInt();
+        scanner.nextLine();
+        return -1;
+    }
+
+    private int leerOpcionMenu() {
+        System.out.print("Seleccione una opción: ");
+        if (scanner.hasNextInt())
+            return scanner.nextInt();
+        scanner.nextLine();
+        return -1;
+    }
+
+    // ── Presentación ──────────────────────────────────────────
+    private void imprimirBienvenida() {
+        System.out.println(Restaurante.SEPARADOR_DOBLE);
+        System.out.println(" RESTAURANTE " + Restaurante.NOMBRE);
+        System.out.println(" " + Restaurante.DIRECCION);
+        System.out.println(" NIT: " + Restaurante.NIT);
+        System.out.println(Restaurante.SEPARADOR_DOBLE);
+    }
+
+    private void imprimirOpciones() {
+        System.out.println("1. Ver carta");
+        System.out.println("2. Agregar producto al pedido");
+        System.out.println("3. Ver pedido actual");
+        System.out.println("4. Generar factura");
+        System.out.println("5. Nueva mesa");
+        System.out.println("0. Salir");
+        System.out.println(Restaurante.SEPARADOR_DOBLE);
+    }
+
+
 
     
 
