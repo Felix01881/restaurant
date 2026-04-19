@@ -58,4 +58,36 @@ public class Mesa {
         this.activa = true;
     }
 
+    // ── Operaciones ───────────────────────────────────────────
+    public boolean agregarProducto(int indiceCatalogo, int cantidad) {
+        Producto producto = getProducto(indiceCatalogo);
+        if (producto == null || cantidad <= 0)
+            return false;
+        producto.agregarCantidad(cantidad);
+        return true;
+    }
+
+    public boolean tienePedido() {
+        for (Producto producto : CATALOGO) {
+            if (producto.fuePedido())
+                return true;
+        }
+        return false;
+    }
+
+    public void reiniciar() {
+        for (Producto producto : CATALOGO) {
+            producto.reiniciarCantidad();
+        }
+        numeroMesa = 0;
+        activa = false;
+        totalUltimaFactura = 0.0;
+    }
+
+    public void registrarFacturaEmitida(double totalFactura) {
+        this.totalUltimaFactura = totalFactura;
+        this.activa = false;
+        contadorFacturas++;
+    }
+
 }
